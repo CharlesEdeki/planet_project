@@ -8,7 +8,7 @@ function isHabitablePlanet(planet) {
     return planet['koi_disposition'] === 'CONFIRMED' 
     && planet['koi_insol'] > 0.36 
     && planet['koi_insol'] < 1.11 
-    && planet['koi_prad'] < 1.6;
+    && planet['koi_prad'] < 1.6
 }
 
 // streaming the csv file and pushing the data to the results array
@@ -27,7 +27,7 @@ fs.createReadStream('keplers_dataset.csv')
     })
     .on('end', () => {
         console.log(habitablePlanets.map((planet) => { // mapping the habitable planets
-            return planet['kepler_name']; // returning the name of the planet
+            return [planet['kepler_name'], planet['koi_insol'], planet['koi_prad'], planet['koi_steff']]; // returning the name of the planet
         }));
         console.log(`${habitablePlanets.length} habitable planets found!`); // logging the number of habitable planets
     });
